@@ -1,0 +1,224 @@
+:root {
+    --bg: #f8f9fa;
+    --surface: #ffffff;
+    --primary: #4361ee;
+    --secondary: #3a86ff;
+    --accent: #7209b7;
+    --text: #2d3748;
+    --text-secondary: #718096;
+    --item-h: 80px;
+}
+
+[data-theme="dark"] {
+    --bg: #1a202c;
+    --surface: #2d3748;
+    --primary: #63b3ed;
+    --secondary: #90cdf4;
+    --accent: #d6bcfa;
+    --text: #f7fafc;
+    --text-secondary: #cbd5e0;
+}
+
+body {
+    background: var(--bg);
+    font-family: 'Hind Siliguri', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    color: var(--text);
+}
+
+.app-container { 
+    height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.search-header { 
+    background: var(--surface); 
+    z-index: 10; 
+    flex-shrink: 0;
+}
+
+.search-box { 
+    background: var(--bg); 
+    border-radius: 12px; 
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: var(--primary);
+}
+
+/* Main layout */
+.main-content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Left Alphabet Bar */
+.alphabet-sidebar {
+    width: 40px;
+    background: var(--surface);
+    border-right: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 10px 0;
+    scrollbar-width: none;
+}
+
+.alphabet-sidebar::-webkit-scrollbar { 
+    display: none; 
+}
+
+.alpha-btn {
+    font-size: 0.8rem;
+    padding: 6px 0;
+    text-align: center;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+    border-radius: 4px;
+    margin: 2px 4px;
+}
+
+.alpha-btn:hover {
+    background: var(--bg);
+    color: var(--primary);
+}
+
+.alpha-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+/* Virtual List */
+.list-viewport {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    will-change: transform;
+}
+
+.scroll-spacer { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    pointer-events: none; 
+}
+
+.items-container {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0;
+}
+
+.list-item {
+    height: var(--item-h);
+    padding: 15px 20px;
+    background: var(--surface);
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.list-item:hover {
+    background: var(--bg);
+    padding-left: 25px;
+}
+
+.list-item.exact-match {
+    border-left: 4px solid var(--primary);
+    background: linear-gradient(90deg, rgba(67, 97, 238, 0.05) 0%, transparent 100%);
+}
+
+.word-text { 
+    font-weight: 700; 
+    font-size: 1.2rem; 
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.word-preview { 
+    font-size: 0.9rem; 
+    color: var(--text-secondary); 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+/* Search highlight */
+.highlight {
+    background-color: #ffd166;
+    padding: 1px 2px;
+    border-radius: 2px;
+}
+
+/* Modal Content */
+.def-box { 
+    background: var(--bg); 
+    padding: 15px; 
+    border-radius: 10px; 
+    margin-bottom: 15px; 
+    border-left: 4px solid var(--primary); 
+}
+
+.grammar-badge {
+    background: var(--primary);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+/* Loading and empty states */
+#loadingSpinner {
+    transition: opacity 0.3s;
+}
+
+#emptyState {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+/* Search info */
+#searchInfo {
+    transition: all 0.3s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .alphabet-sidebar {
+        width: 35px;
+        padding: 8px 0;
+    }
+    
+    .alpha-btn {
+        font-size: 0.75rem;
+        padding: 5px 0;
+    }
+    
+    .list-item {
+        height: 75px;
+        padding: 12px 15px;
+    }
+    
+    .word-text {
+        font-size: 1.1rem;
+    }
+}
